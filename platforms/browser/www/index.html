@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src *; img-src 'self' data:; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta http-equiv="Content-Security-Policy" content="default-src *; worker-src blob:; img-src 'self' data:; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
-    <link rel="stylesheet" href="/themes/default.min.css" />
-    <link rel="stylesheet" href="/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="themes/default.min.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css">
       <title>Lector QR</title>
@@ -58,6 +59,9 @@
           <label for="">Host</label>
           <input type="text" id="txtServerHost">
 
+          <label for="">Port</label>
+          <input type="text" id="txtServerPort">
+
           <div class="pt3">
               <button type="button"  class="ui-btn" id="btnSaveConfig">Guardar</button>
               <a href="#main" class="ui-btn">Atras</a>
@@ -70,7 +74,7 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script type="text/javascript" src="/js/index.js"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>

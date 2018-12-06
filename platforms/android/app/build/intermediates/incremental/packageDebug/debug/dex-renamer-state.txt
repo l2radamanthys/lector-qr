@@ -1,0 +1,4 @@
+#Wed Dec 05 23:36:48 ART 2018
+base.0=/home/ricardo/Workspace/Cordova/LectorQR/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

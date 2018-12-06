@@ -1,3 +1,8 @@
 * {
   font-family: 'Oxygen', sans-serif;
 }
+
+.transparent {
+    background: none transparent !important;
+    background-color: none !important;
+}
