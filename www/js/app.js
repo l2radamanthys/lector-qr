@@ -1,9 +1,54 @@
+function enviarDatos(texto) {
+    texto = texto !== undefined ? texto : $("#txtDataEntry").val();
+    //let texto = $("#txtDataEntry").val();
+    let url = localStorage.getItem('qr_server_url');
+    let port = localStorage.getItem('qr_server_port');
+    $.ajax({
+        url: `${url}:${port}/send-text/`,
+        type: "POST",
+        data: {
+            data: texto,
+        },
+        success: function(response) {
+            console.log('r', response);
+        }
+    });
+}
+
+
+function mostrarContenido(err, text) {
+  if (err) {
+    console.log('ScanerError', err._message);
+  } else {
+    alert('Codigo', text);
+  }
+}
+
+
+function escanearCodigo() {
+  QRScanner.scan(mostrarContenido);
+  QRScanner.show();
+  $(".ui-page-active").hide();
+  $("#btnsScaner").show();
+}
+
+
+function cerrarEscaner() {
+  console.log('cerrar');
+  QRScanner.cancelScan(function(status){
+    console.log('cancelando escaneado');
+    console.log(status);
+  });
+  QRScanner.hide();
+  $("#btnsScaner").hide();
+  $(".ui-page-active").show();
+}
+
+
 $(document).ready(function() {
-    $("#btnScan").click(function (e) {
-        $('body').addClass('transparent');        
-        QRScanner.scan(displayContents);
-        QRscanner.show();
-    })
+  $("#btnScan").click(() => {
+    escanearCodigo();
+  });
 
     $("#btnSendEntry").click(function (e) {
         enviarDatos();
@@ -24,33 +69,16 @@ $(document).ready(function() {
       $("#txtServerPort").val(localStorage.getItem('qr_server_port'));
     }
 
+
+  setTimeout(() => {
+    const btnCancel = '<button type="button"' +
+        'class="f7 link dim br-pill bg-white ba ph3 pv2 mb2 dib black"' +
+        'onclick="cerrarEscaner()">Cancelar</button>';
+    const btns = '<div id="btnsScaner"' + 
+        'class="pa3 w-100 tc absolute bottom-0 left-0">' +
+        btnCancel + 
+        '</div>';
+    $("#cordova-plugin-qrscanner-video-preview").after(btns);
+    $("#btnsScaner").hide();
+  }, 1000);
 });
-
-
-function enviarDatos(texto) {
-    texto = texto !== undefined ? texto : $("#txtDataEntry").val();
-    //let texto = $("#txtDataEntry").val();
-    let url = localStorage.getItem('qr_server_url');
-    let port = localStorage.getItem('qr_server_port');
-    $.ajax({
-        url: `${url}:${port}/send-text/`,
-        type: "POST",
-        data: {
-            data: texto,
-        },
-        success: function(response) {
-            console.log('r', response);
-        }
-    });
-}
-
-function displayContents(err, text){
-  if(err) {
-    // an error occurred, or the scan was canceled (error code `6`)
-    console.log(err)
-    alert(err._message);
-  } else {
-    alert(text);
-    $('body').removeClass('transparent');
-  }
-}
